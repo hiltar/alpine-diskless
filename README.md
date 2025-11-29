@@ -15,6 +15,19 @@ password # TODO: SSH key auth
 none
 ```
 
+# Configurations
+`cmdline.txt`  
+```
+modules=loop,squashfs,sd-mod,usb-storage quiet console=tty1
+```  
+`usercfg.txt`  
+```
+gpu_mem=8
+dtparam=audio=off
+dtoverlay=disable-bt
+hdmi_enable=0
+```  
+
 # Services
 
 `vi /etc/init.d/service`  
