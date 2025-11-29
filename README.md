@@ -17,7 +17,7 @@ none
 
 # Services
 
-`vi /etc/init.d/service`
+`vi /etc/init.d/service`  
 ```
 #!/sbin/openrc-run
 
@@ -43,12 +43,12 @@ start() {
         --stdout /var/log/service.log \
     eend $?
 }
-```
+```  
 
 ## Enable service
-`chmod +x /etc/init.d/service`
-`rc-update add service default`
-`mkdir /opt/service/ # If service saves configuration files or data`
+`chmod +x /etc/init.d/service`  
+`rc-update add service default`  
+`mkdir /opt/service/ # If service saves configuration files or data`  
 
 # LBU
 ```
@@ -56,7 +56,7 @@ lbu add /opt/service/
 lbu add /etc/init.d/service
 lbu add /etc/wpa_supplicant/ # If using WiFi network
 lbu commit
-```
+```  
 
 # Filesystem in RAM
 ```
@@ -69,7 +69,7 @@ echo "tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,size=64m 0 0" >> /etc/fstab
 
 
 # Crontab
-`crontab -e`
+`crontab -e`  
 ```
 # min   hour    day     month   weekday command
   *     1       *       *       7       lbu status | grep -q . && /usr/sbin/lbu commit              
