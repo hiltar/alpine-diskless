@@ -1,12 +1,12 @@
 # alpine-diskless
-Alpine Linux setup with diskless
+Alpine Linux setup with diskless mode for Raspberry Pi
 
 
 # setup-alpine
 
 ```
 setup-alpine
-# Proceed with default options.
+# Proceed with desired options.
 
 # SSH
 password # TODO: SSH key auth
@@ -17,13 +17,62 @@ none
 
 # Services
 
+`vi /etc/init.d/service`
+```
+#!/sbin/openrc-run
+
+name="service"
+description="Run service from ramdisk"
+command="/mnt/ramdisk/service/service"
+command_background=true
+pidfile="/run/${RC_SVCNAME}.pid"
+    
+start_pre() {
+    if [ ! -f /mnt/ramdisk/service/service ]; then
+        mkdir /mnt/ramdisk/service
+        cp /media/mmcblk0p1/service/service /mnt/ramdisk/service || return 1
+    fi
+}
+
+start() {
+    ebegin "Starting ${name}"
+    start-stop-daemon --start --exec "${command}" \
+        --pidfile "${pidfile}" \
+        --background \
+        --make-pidfile \
+        --stdout /var/log/service.log \
+    eend $?
+}
+```
+
+## Enable service
+`chmod +x /etc/init.d/service`
+`rc-update add service default`
+`mkdir /opt/service/ # If service saves configuration files or data`
+
+# LBU
+```
+lbu add /opt/service/
+lbu add /etc/init.d/service
+lbu add /etc/wpa_supplicant/ # If using WiFi network
+lbu commit
+```
 
 # Filesystem in RAM
 ```
-# For services
+# For services - This example uses 8MB RAM
 echo "tmpfs /mnt/ramdisk tmpfs size=8m,mode=0755 0 0" >> /etc/fstab
-# Increase tmp size for lbu
+# Increase tmp size for lbu - 64MB RAM
 echo "tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,size=64m 0 0" >> /etc/fstab
 ```  
 `mount -a`
 
+
+# Crontab
+`crontab -e`
+```
+# min   hour    day     month   weekday command
+  *     1       *       *       7       lbu status | grep -q . && /usr/sbin/lbu commit              
+  *     4       *       1/3     *       apk update && apk upgrade -a --no-interactive               
+  1     4       *       1/3     *       rc-service sshd restart
+```
