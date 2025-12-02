@@ -1,6 +1,37 @@
 # alpine-diskless
 Alpine Linux setup with diskless mode for Raspberry Pi
 
+# Preparation for Alpine Linux installation
+
+```
+# Prepare SD Card
+sudo mkdir /mnt/sdcard
+sudo mount /dev/sdc1 /mnt/sdcard
+
+# Extract archive into /mnt/sdcard
+sudo tar -xzf alpine-rpi-<version>-aarch64.tar.gz -C /mnt/sdcard
+
+# Download from https://github.com/macmpi/alpine-linux-headless-bootstrap/releases
+sudo mv headless.apkovl.tar.gz /mnt/sdcard
+```
+
+`nano /mnt/sdcard/wpa_supplicant.conf # For wifi connection`  
+```
+country=FI
+
+network={
+	key_mgmt=WPA-PSK
+	ssid="mySSID"
+	psk="myPassPhrase"
+}
+```
+
+```
+sudo mkdir /mnt/sdcard/service
+# service executable into /mnt/sdcard/service
+sync
+sudo umount mnt/sdcard
+```
 
 # setup-alpine
 
