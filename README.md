@@ -71,7 +71,7 @@ When Alpine Linux boots in diskless mode, it initially only loads a few required
 By default, an `lbu commit` only stores modifications below /etc, with the exception of the /etc/init.d/ directory. If a user was created during the setup-alpine script, that user's home directory is also added to the paths that lbu will backup up. However, `lbu add` enables modifying that set of included files, and can be used to specify additional files or folders. 
 
 ```
-lbu add /opt/service/
+lbu add /opt/service/ # If service saves configuration files or data
 lbu add /etc/init.d/service
 lbu add /etc/wpa_supplicant/ # If using WiFi network
 lbu commit
