@@ -91,7 +91,7 @@ echo "tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,size=64m 0 0" >> /etc/fstab
 `crontab -e`  
 ```
 # min hour day month weekday command
-  *   1    *   *     7       lbu status | grep -q . && /usr/sbin/lbu commit # Backup system every week at Sunday              
-  *   4    *   1/3   *       apk update && apk upgrade -a --no-interactive  # Upgrade packages every Q
-  1   4    *   1/3   *       rc-service sshd restart
+  1   1    *   *     7       lbu status | grep -q . && /usr/sbin/lbu commit # Backup system every week at Sunday              
+  2   4    *   1/3   *       apk update && apk upgrade -a --no-interactive  # Upgrade packages every Q
+  3   4    *   1/3   *       rc-service sshd restart
 ```
