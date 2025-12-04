@@ -124,8 +124,8 @@ lbu commit
 ```
 # For services - This example uses 8MB RAM
 echo "tmpfs /mnt/ramdisk tmpfs size=8m,mode=0755 0 0" >> /etc/fstab
-# Increase tmp size for lbu - 64MB RAM
-echo "tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,size=64m 0 0" >> /etc/fstab
+# Increase tmp size for lbu - 32MB RAM
+echo "tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,size=32m 0 0" >> /etc/fstab
 ```  
 `mount -a`
 
