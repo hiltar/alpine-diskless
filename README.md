@@ -57,7 +57,19 @@ gpu_mem=8
 dtparam=audio=off
 dtoverlay=disable-bt
 hdmi_enable=0
-```  
+```
+
+# OS Upgrade
+`vi /etc/apk/repositories`  
+```
+/media/mmcblk0p1/apks
+http://dl-cdn.alpinelinux.org/alpine/v3.23/main
+#http://dl-cdn.alpinelinux.org/alpine/v3.23/community
+```
+`lbu commit`  
+`reboot`  
+`cat /etc/os-release`  
+`apk update && apk upgrade --available`  
 
 # Services
 
