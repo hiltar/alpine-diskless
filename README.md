@@ -135,6 +135,6 @@ echo "tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,size=32m 0 0" >> /etc/fstab
 ```
 # min hour day month weekday command
   1   1    *   *     7       lbu status | grep -q . && /usr/sbin/lbu commit # Backup system every week at Sunday              
-  2   4    *   1/3   *       apk update && apk upgrade -a --no-interactive  # Upgrade packages every Q
-  3   4    *   1/3   *       rc-service sshd restart
+  2   4    5   *     *       apk update && apk upgrade -a --no-interactive  # Upgrade packages every month
+  3   4    5   *     *       rc-service sshd restart
 ```
