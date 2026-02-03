@@ -39,7 +39,7 @@ sudo umount mnt/sdcard
 setup-alpine
 # Proceed with desired options.
 
-# SSH
+# SSH = dropbear
 password # TODO: SSH key auth
 
 # Disk & Install
@@ -149,5 +149,9 @@ echo "tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,size=32m 0 0" >> /etc/fstab
 # Packages
 ```
 # Unnecessary packages for wifi connection after configuring Ethernet connection
-apk del --purge iw libnl3 bridge wpa_supplicant
+apk del --purge iw libnl3 wpa_supplicant
+rc-service networking restart
+
+apk fix
+apk cache clean
 ```
