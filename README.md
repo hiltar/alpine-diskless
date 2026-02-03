@@ -44,6 +44,12 @@ password # TODO: SSH key auth
 
 # Disk & Install
 none
+
+# Setup ethernet interface
+setup-interfaces
+eth0
+dhcp
+done
 ```
 
 # Configurations
@@ -137,4 +143,11 @@ echo "tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,size=32m 0 0" >> /etc/fstab
   1   1    *   *     0       lbu status | grep -q . && /usr/sbin/lbu commit # Backup system every week at Sunday              
   2   4    5   *     *       apk update && apk upgrade -a --no-interactive  # Upgrade packages every month
   3   4    5   *     *       rc-service sshd restart
+```
+
+
+# Packages
+```
+# Unnecessary packages for wifi connection after configuring Ethernet connection
+apk del --purge iw libnl3 bridge wpa_supplicant
 ```
