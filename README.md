@@ -40,7 +40,6 @@ setup-alpine
 # Proceed with desired options.
 
 # SSH = dropbear
-password # TODO: SSH key auth
 
 # Disk & Install
 none
