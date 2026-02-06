@@ -49,6 +49,19 @@ setup-interfaces
 eth0
 dhcp
 done
+
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
+# For LBU
+lbu add /etc/wpa_supplicant/wpa_supplicant.conf
+lbu add /etc/dropbear/
+lbu add /etc/conf.d/dropbear # Options may be configured there
+lbu add ~/.ssh/
+
+lbu commit -d
 ```
 
 # Configurations
