@@ -1,1 +1,1 @@
-modules=loop,squashfs,sd-mod,usb-storage quiet console=tty1
+dwc_otg.lpm_enable=0 console=tty1 root=/dev/ram0 rw initrd=uzImage-lts initramfs-lts alpine_dev=mmcblk0p1:vfat modules=loop,squashfs,sd-mod,usb-storage quiet loglevel=3
