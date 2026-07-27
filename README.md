@@ -100,6 +100,12 @@ description="Run service from ramdisk"
 command="/mnt/ramdisk/service/service"
 command_background=true
 pidfile="/run/${RC_SVCNAME}.pid"
+
+depend() {
+    need localmount
+    use net dns
+    after bootmisc clock
+}
     
 start_pre() {
     if [ ! -f /mnt/ramdisk/service/service ]; then
